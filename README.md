@@ -139,6 +139,39 @@ If successful, a JSON payload will return results similar to this:
     "Arn": "arn:aws:iam::123456789012:user/terraform-beginner-bootcamp"
 }
 ```
+## Terraform Basics
+### Terraform Registry
+Terrform sources its providers and modules from the Terraform registry, which is located at [registry.terraform.io](https://registry.terraform.io/)
 
+- **Providers** is a way to directly interact with an API to make it powered by Terraform.
+[Random Terraform Provider](https://registry.terraform.io/providers/hashicorp/random/latest)
 
+- **Modules** are a collection of Terraform files that provide a template to utilize commonly used actions. They make Terraform code modular, portable, and sharable. 
+
+### Terraform Console
+It is possible to list all of the Terraform commands by simply typing `terraform`.
+
+#### Terraform init
+At the start of a new Terraform project, running `terraform init` will download binaries for the Terraform providers used in this project. 
+
+#### Terraform Plan
+Terraform plan generates a changeset about the state of the infrastructure and what would be changed. 
+The changeset (or plan) can be output to an apply, but it can often be ignored. 
+
+#### Terraform Apply
+Terraform apply will run a plan and pass the changeset to be executed by Terraform. It should prompt "yes" or "no," to automatically approve an apply use the `auto-approve` flag.
+
+### Terraform Lock Files
+`.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project. 
+
+The Terraform Lock file *should* be committed to the Version Control System (VCS) ex: GitHub. 
+
+### Terraform State Files 
+`.terraform.tfstate` contains information about the state of the infrastructure. This file *should not* be committed to the VCS. 
+This file can contain sensitive data, and losing this file means losing information about the state of the infrastructure. 
+
+`.terraform.tfstate.backup` is the previous state file. 
+
+#### Terraform Directory
+`.terraform` directory contains binaries of terraform providers. 
 
