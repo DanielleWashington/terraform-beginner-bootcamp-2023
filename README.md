@@ -202,3 +202,4 @@ Provide the following code (replacing with your generated token in the file):
     }
 }
 ```
+The process has been automated using a workaround with the following bash script [bin/generate_tfrc_creds](bin/generate_tfrc_creds)
