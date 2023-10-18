@@ -14,5 +14,53 @@ PROJECT_ROOT
 ├── outputs.tf              # stores our outputs
 └── README.md               # required for root modules
 ```
-
 [Standard Module Structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
+
+## Terraform and Input Variables
+
+### Terraform Cloud Variables
+
+Two types of variables are able to be set in Terraform Cloud:
+- Enviroment Variables - those set in a bash terminal (AWS credentials)
+- Terraform Variables - those normally set in a tfvars file
+
+Terraform Cloud variables can be set to "sensitive" so they are not shown visibliy in the UI.
+
+### Loading Terraform Input Variables
+
+[Terraform Input Variables](https://developer.hashicorp.com/terraform/language/values/variables)
+
+### var flag
+The `-var` flag can be used to set an input variable or override a variable in the tfvars file (`terraform -var user_ud="my-user_id"`)
+
+### var-file flag
+
+The `var-file` flag passes input variables into `plan` and `apply` commands using a file that contains those values. The input variable values can be saved in a file with a `.tfvars` extension. 
+For example, below inputs variables into the `apply` command into a "Secrets" and "Dev" file:
+```sh
+tf apply
+-var-file 'secrets.tfvars'
+-var-file 'dev.tfvars'
+```
+
+
+### terraform.tvfars
+
+This is the default file to load in terraform variables in blunk
+
+### auto.tfvars
+
+The `.auto.tfvars` functionality allows for Terrafotm to automatically load variable definitions. 
+
+### Order of Precedence
+The order of precedence in Terraform determines the value of a variable. Should the same variable be assigned multiple values, then Terraform will use the value of highest precedence and override any other values. 
+List (in order from highest to lowest priority):
+1. Environment (`tf_var_variable_name`)
+2. `terraform.tfvars` file
+3. `terraform.tfvars.json` file
+4. `.auto.tfvars` or `.auto.tfvars.json`
+5. `-var` or `-var-file` options on the command line, in the order they are provided.
+6. variable defaults
+
+[Terraform Variables](https://www.env0.com/blog/terraform-variables)
+
