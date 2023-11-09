@@ -64,3 +64,15 @@ List (in order from highest to lowest priority):
 
 [Terraform Variables](https://www.env0.com/blog/terraform-variables)
 
+## Dealing with Coniguration Drift
+## What Happens if the State File is Lost?
+If the state file is lost, the infrastructure will mostly likely have to be manually torn down. 
+Terraform import can be used, but it will not work for all cloud resources. The Terraform providers documentation should be checked for which resources support `import`.
+### Fix Missing Resources with Terraform Import
+
+`terraform import aws_s3_bucket.example`
+[Terraform Import](https://developer.hashicorp.com/terraform/cli/import)
+[AWS S3 Bucket Import](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import)
+
+### Fix Manual Configuration 
+If cloud resources are manually deleted or modified via "ClickOps," running `terraform plan` or `tf plan` will attempt to put infrastructure back into its expected state, fixing configuration drift.
