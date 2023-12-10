@@ -4,5 +4,5 @@ output "bucket_name" {
 
 output "website_endpoint" {
   description = "Bucket name for static website hosting"
-  value = aws_s3_bucket_website_configuration.website_configuration
+  value = aws_s3_bucket_website_configuration.website_configuration.website_endpoint
 }

@@ -179,3 +179,13 @@ Jsonencode can be used to create the JSON policy inline in HCL.
 {"hello:world"}
 ```
 [jsonencode](https://developer.hashicorp.com/terraform/language/functions/jsonencode)
+
+### Changing the Lifecycle of Resources
+[Meta Arguments Lifecycles](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+## Terraform Data
+Values like `local values` and `input variables` are not valid in `replaced_triggered_by` 
+
+ You can use the behavior of `terraform_data` to plan an action each time input changes to indirectly use a plain value to trigger replacement.
+
+[Terraform Data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
