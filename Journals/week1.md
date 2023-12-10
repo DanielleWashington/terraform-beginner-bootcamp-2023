@@ -189,3 +189,49 @@ Values like `local values` and `input variables` are not valid in `replaced_trig
  You can use the behavior of `terraform_data` to plan an action each time input changes to indirectly use a plain value to trigger replacement.
 
 [Terraform Data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+## Provisioners
+Provisioners allow you to execute commands on compute instances (AWS CLI command), they are not recommended for use by HashiCorp because Configuration Management tools like Ansible are a better fit, but the functionality exists. 
+
+[Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+### Local-exec
+
+Executes a command on the machine running the Terraform commands like `plan apply`
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo The server's IP address is ${self.private_ip}"
+  }
+}
+```
+
+[Local-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec)
+
+### Remote Exec
+Executes commands on a machine that you target, it requires credentials like ssh.
+
+```tf
+resource "aws_instance" "web" {
+  # ...
+
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+```
+[Remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
