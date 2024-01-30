@@ -13,13 +13,13 @@ terraform {
   #    name = "terra-house-1"
   #  }
   #}
-  # cloud {
-  #   organization = "dwashington100292"
+cloud {
+    organization = "dwashington100292"
 
-  #   workspaces {
-  #     name = "terra-house-1"
-  #   }
-  # } 
+    workspaces {
+      name = "terra-house-11"
+    }
+  } 
 
 
 }
