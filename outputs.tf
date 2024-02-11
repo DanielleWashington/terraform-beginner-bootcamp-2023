@@ -1,14 +1,13 @@
-# output "bucket_name" {
-#   description = "Bucket name for our static website hosting"
-#   value = module.terrahouse_aws.bucket_name
-# }
-# output "s3_website_endpoint" {
-#   description = "S3 Static Website hosting endpoint"
-#   value = module.terrahouse_aws.website_endpoint
-# }
+output "bucket_name" {
+  value = module.home_bossa-nova_hosting.bucket_name
+}
 
-# output "cloudfront_url" {
-#   description = "The Cloudfront distribution domain name"
-#   value = module.terrahouse_aws.cloudfront_url
+output "website_endpoint" {
+  description = "S3 name for static website hosting"
+  value = module.home_bossa-nova_hosting.website_endpoint
+}
+
+output "domain_name" {
+  value = module.home_bossa-nova_hosting.domain_name
   
-# }
+}

@@ -13,13 +13,13 @@ terraform {
   #    name = "terra-house-1"
   #  }
   #}
-  # cloud {
-  #   organization = "dwashington100292"
+  cloud {
+    organization = "dwashington100292"
 
-  #   workspaces {
-  #     name = "terra-house-1"
-  #   }
-  # } 
+    workspaces {
+      name = "terra-house-1"
+    }
+  } 
 
 
 }
@@ -31,6 +31,13 @@ provider "terratowns" {
   
 }
 
+module "home_bossa-nova_hosting" {
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = var.bossa-nova.public_path
+  content_version = var.bossa-nova.content_version
+}
+
 resource "terratowns_home" "home" {
   name = "Bossa Nova for the World!"
   description = <<DESCRIPTION
@@ -38,17 +45,26 @@ Bossa nova, a music style created in Brazil, quite literally means
 "new wave." It is known for its smooth, elegant melodies that is a 
 blend of samba and jazz. It originated in Rio de Janeiro's Copacabana neighborhood. 
 DESCRIPTION
- domain_name = module.terrahouse_aws.cloudfront_url
+  domain_name = module.home_bossa-nova_hosting.domain_name
+  town = "missingo"
+  content_version = 1
+}
+
+module "home_reality-tv_hosting" {
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = var.reality-tv.public_path
+  content_version = var.reality-tv.content_version
+}
+
+resource "terratowns_home" "home_reality" {
+  name = "Iconic Moments in Reality TV"
+  description = <<DESCRIPTION
+Some of us despise reality tv, while some of us revel in its chaos!
+Although some may try, it's a Herculean effort to try and escape the effects of pop culture.
+DESCRIPTION
+
+ domain_name = module.home_reality-tv_hosting.domain_name
  town = "missingo"
  content_version = 1
-}
-module "terrahouse_aws" {
-  source = "./modules/terrahouse_aws"
-  user_uuid = var.teacherseat_user_uuid
-  bucket_name = var.bucket_name
-  index_html_filepath = var.index_html_filepath
-  error_html_filepath = var.error_html_filepath
-  content_version = var.content_version
-  assets_path = var.assets_path
-
 }
