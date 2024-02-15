@@ -46,8 +46,8 @@ Bossa nova, a music style created in Brazil, quite literally means
 blend of samba and jazz. It originated in Rio de Janeiro's Copacabana neighborhood. 
 DESCRIPTION
   domain_name = module.home_bossa-nova_hosting.domain_name
-  town = "missingo"
-  content_version = 1
+  town = "melomaniac-mansion"
+  content_version = 2
 }
 
 module "home_reality-tv_hosting" {
@@ -65,6 +65,6 @@ Although some may try, it's a Herculean effort to try and escape the effects of 
 DESCRIPTION
 
  domain_name = module.home_reality-tv_hosting.domain_name
- town = "missingo"
- content_version = 1
+ town = "video-valley"
+ content_version = 2
 }
